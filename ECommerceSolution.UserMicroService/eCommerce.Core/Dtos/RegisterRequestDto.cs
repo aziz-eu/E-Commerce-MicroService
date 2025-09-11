@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eCommerce.Core.Dtos.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace eCommerce.Core.Dtos
         string? Email,
         string? Password,
         string? Name,
-        string? Gender
+        GenderOptions? Gender
         );
     
 }
