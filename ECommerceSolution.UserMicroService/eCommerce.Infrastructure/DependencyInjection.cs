@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using eCommerce.Core.RepositoryContracts;
+using eCommerce.Infrastructure.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +13,9 @@ namespace eCommerce.Infrastructure;
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            // Add infrastructure services here, e.g., database context, repositories, etc.
-            // Example:
+        // Add infrastructure services here, e.g., database context, repositories, etc.
+        // Example:
+        services.AddSingleton<IUsersRepository, UsersRepository>();
             return services;
     }
 }
