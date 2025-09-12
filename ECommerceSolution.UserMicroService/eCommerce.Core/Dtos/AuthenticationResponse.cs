@@ -17,5 +17,11 @@ namespace eCommerce.Core.Dtos
         bool? IsAuthenticated,
         string? Token
 
-        );
+        )
+    {
+        public AuthenticationResponse()  : this(default, default, default, default, default, default)
+        {
+            
+        }
+    }
 }

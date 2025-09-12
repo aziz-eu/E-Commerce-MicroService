@@ -1,4 +1,5 @@
-﻿using eCommerce.Core.Dtos;
+﻿using AutoMapper;
+using eCommerce.Core.Dtos;
 using eCommerce.Core.Entities;
 using eCommerce.Core.RepositoryContracts;
 using eCommerce.Core.ServiceContracts;
@@ -15,10 +16,12 @@ namespace eCommerce.Core.Services
     internal class UserService : IUserService
     {
         private readonly IUsersRepository _usersRepository;
+        private readonly IMapper _mapper;
 
-        public UserService(IUsersRepository usersRepository)
+        public UserService(IUsersRepository usersRepository, IMapper mapper)
         {
             _usersRepository = usersRepository;
+            _mapper = mapper;
         }
 
         public async Task<AuthenticationResponse?> Login(LoginDto loginDto)
@@ -28,7 +31,13 @@ namespace eCommerce.Core.Services
             {
                 return null;
             }
-            return new AuthenticationResponse(user.UserId, user.Email, user.Name, user.Gender, true, "Token");
+
+            //return new AuthenticationResponse(user.UserId, user.Email, user.Name, user.Gender, true, "Token");
+            return _mapper.Map<AuthenticationResponse>(user) with
+            {
+                IsAuthenticated = true,
+                Token = "token"
+            };
 
         }
 
@@ -47,7 +56,12 @@ namespace eCommerce.Core.Services
             {
                 return null;
             }
-            return new AuthenticationResponse(applicationUser.UserId, applicationUser.Email, applicationUser.Name, applicationUser.Gender, IsAuthenticated: true, "token");
+            //return new AuthenticationResponse(applicationUser.UserId, applicationUser.Email, applicationUser.Name, applicationUser.Gender, IsAuthenticated: true, "token");
+            return _mapper.Map<AuthenticationResponse>(applicationUser) with
+            {
+                IsAuthenticated = true,
+                Token = "token"
+            };
         }
     }
 }
