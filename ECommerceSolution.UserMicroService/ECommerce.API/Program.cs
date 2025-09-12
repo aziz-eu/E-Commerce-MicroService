@@ -1,10 +1,13 @@
 using eCommerce.Core;
 using eCommerce.Infrastructure;
 using ECommerce.API.Middlewares;
+using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddInfrastructure();
 builder.Services.AddCore();
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(
+    opt => opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())
+    );
 var app = builder.Build();
 app.UseExceptionHandlerMiddleware();
 app.UseRouting();
