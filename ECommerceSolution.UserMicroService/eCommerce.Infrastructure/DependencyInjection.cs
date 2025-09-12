@@ -1,4 +1,5 @@
 ﻿using eCommerce.Core.RepositoryContracts;
+using eCommerce.Infrastructure.DbContext;
 using eCommerce.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,6 +17,7 @@ namespace eCommerce.Infrastructure;
         // Add infrastructure services here, e.g., database context, repositories, etc.
         // Example:
         services.AddSingleton<IUsersRepository, UsersRepository>();
+        services.AddTransient<DepperDbContext>();
             return services;
     }
 }
