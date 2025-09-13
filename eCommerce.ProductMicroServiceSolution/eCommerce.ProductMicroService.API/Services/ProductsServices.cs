@@ -1,9 +1,10 @@
 ﻿using eCommerce.ProductMicroService.API.Data;
 using eCommerce.ProductMicroService.API.Entities;
+using eCommerce.ProductMicroService.API.Services.Interfaces;
 
 namespace eCommerce.ProductMicroService.API.Services
 {
-    public class ProductsServices
+    public class ProductsServices:IProductService
     {
         private readonly IGenericRepository<Product> _productsRepository;
         private readonly IUnitOfWork _unitOfWork;

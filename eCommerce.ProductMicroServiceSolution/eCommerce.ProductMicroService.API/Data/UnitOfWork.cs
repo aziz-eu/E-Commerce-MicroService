@@ -1,17 +1,31 @@
-﻿
-using eCommerce.ProductMicroService.API.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using eCommerce.ProductMicroService.API.Entities;
 
 namespace eCommerce.ProductMicroService.API.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db;
+        private IGenericRepository<Product>? _productRepository;
 
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
-           
+        }
+
+        public IGenericRepository<Product> Products
+        {
+            get
+            {
+                if (_productRepository == null)
+                    _productRepository = new GenericRepository<Product>(_db);
+
+                return _productRepository;
+            }
+        }
+
+        public async Task SaveAsync(CancellationToken cancellationToken = default)
+        {
+            await _db.SaveChangesAsync(cancellationToken);
         }
 
         public void Dispose()
@@ -19,12 +33,6 @@ namespace eCommerce.ProductMicroService.API.Data
             _db.Dispose();
             GC.SuppressFinalize(this);
         }
-
-        public async Task SaveAsync(CancellationToken cancellationToken = default)
-        {
-        
-            cancellationToken = new CancellationToken(); 
-            await _db.SaveChangesAsync(cancellationToken);
-        }
     }
+
 }

@@ -1,5 +1,7 @@
 using eCommerce.ProductMicroService.API.Data;
 using eCommerce.ProductMicroService.API.Mappers;
+using eCommerce.ProductMicroService.API.Services;
+using eCommerce.ProductMicroService.API.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,8 +15,11 @@ builder.Services.AddAutoMapper(typeof(ApplicationMappingProfile));
 builder.Services.AddDbContext<ApplicationDbContext>(
     opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
     ));
-//builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IProductService, ProductsServices>();
+
+
 
 var app = builder.Build();
 

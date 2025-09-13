@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace eCommerce.ProductMicroService.API.Data
 {
-    public class GenericRepository<T> where T : class
+        public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         public readonly ApplicationDbContext context;
         private readonly DbSet<T> dbSet;
