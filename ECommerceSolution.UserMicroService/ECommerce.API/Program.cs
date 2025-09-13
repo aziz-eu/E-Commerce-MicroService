@@ -12,7 +12,24 @@ builder.Services.AddControllers().AddJsonOptions(
     );
 builder.Services.AddAutoMapper(typeof(ApplicationUserMappingProfile).Assembly);
 builder.Services.AddFluentValidationAutoValidation(); 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.
+        WithOrigins("http://localhost:4200")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+        //.AllowAnyOrigin();
+    });
+});
+
 var app = builder.Build();
+app.UseSwagger();
+app.UseSwaggerUI();
+app.UseCors();
 app.UseExceptionHandlerMiddleware();
 app.UseRouting();
 app.UseAuthentication();
