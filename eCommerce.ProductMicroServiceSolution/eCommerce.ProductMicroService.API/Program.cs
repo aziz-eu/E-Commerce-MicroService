@@ -1,4 +1,5 @@
 using eCommerce.ProductMicroService.API.Data;
+using eCommerce.ProductMicroService.API.Mappers;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(ApplicationMappingProfile));
 builder.Services.AddDbContext<ApplicationDbContext>(
     opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
     ));
