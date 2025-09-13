@@ -1,5 +1,6 @@
 ﻿
 using eCommerce.ProductMicroService.API.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace eCommerce.ProductMicroService.API.Data
 {
@@ -15,23 +16,15 @@ namespace eCommerce.ProductMicroService.API.Data
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _db.Dispose();
+            GC.SuppressFinalize(this);
         }
 
-
-
-        //public IOrderDetailRepository OrderDetail { get; private set; }
-
-
-
-        public void SaveAsync()
+        public async Task SaveAsync(CancellationToken cancellationToken = default)
         {
-            _db.SaveChanges();
-        }
-
-        public void SaveAsync(CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
+        
+            cancellationToken = new CancellationToken(); 
+            await _db.SaveChangesAsync(cancellationToken);
         }
     }
 }
