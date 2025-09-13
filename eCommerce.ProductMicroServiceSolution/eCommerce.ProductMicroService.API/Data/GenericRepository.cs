@@ -8,7 +8,7 @@ namespace eCommerce.ProductMicroService.API.Data
         public readonly ApplicationDbContext context;
         private readonly DbSet<T> dbSet;
 
-        protected GenericRepository(ApplicationDbContext context)
+        public GenericRepository(ApplicationDbContext context)
         {
 
             this.context = context;
