@@ -1,5 +1,6 @@
 using eCommerce.ProductMicroService.API.Data;
 using eCommerce.ProductMicroService.API.Mappers;
+using eCommerce.ProductMicroService.API.Middlewares;
 using eCommerce.ProductMicroService.API.Services;
 using eCommerce.ProductMicroService.API.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseSwagger();
 app.UseSwaggerUI();
+app.UseExceptionHenderMiddleware();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
