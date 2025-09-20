@@ -1,4 +1,4 @@
-@eCommerce.ProductMicroService.API_HostAddress = http://localhost:5119
+@eCommerce.ProductMicroService.API_HostAddress = http://localhost:5122
 
 GET {{eCommerce.ProductMicroService.API_HostAddress}}/weatherforecast/
 Accept: application/json
