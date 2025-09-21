@@ -1,0 +1,16 @@
+services:
+  sql1:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql1
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Password@123"
+    ports:
+      - "1400:1433"
+    restart: unless-stopped
+  product-microservice:
+    image: aziz1k99/product-app:init
+    ports:
+      - "8080:8080"
+
+  
